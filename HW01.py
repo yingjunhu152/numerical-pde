@@ -47,7 +47,48 @@ def dirichlet_solve(a,b,m,q,f,alpha,beta):
 
     return np.linalg.solve(left_matrix,right_vectors)
     
-    
+import matplotlib.pyplot as plt    
+u1=dirichlet_solve(0,math.pi,10,q,f,0,0)
+u2=dirichlet_solve(0,math.pi,20,q,f,0,0)
+u3=dirichlet_solve(0,math.pi,40,q,f,0,0)
+u4=dirichlet_solve(0,math.pi,80,q,f,0,0)
+u5=dirichlet_solve(0,math.pi,160,q,f,0,0)
 
+
+all_y_data = [u1, u2, u3, u4,u5]
+
+labels = ['pi/10', 'pi/20', 'pi/40', 'pi/80','pi/160']
+
+colors = ['blue', 'red', 'green', 'purple','pink'] 
+
+linestyles = ['-', '-', '-', '-','-'] 
+
+# --- 2. 绘制图表 ---
+plt.figure(figsize=(10, 6)) # 设置图表尺寸
+
+# 循环绘制每一条折线
+for y_data, label, color, linestyle in zip(all_y_data, labels, colors, linestyles):
+    
+    plt.plot(
+        mesh(0,math.pi,len(y_data)-1), 
+        y_data, 
+        label=label, 
+        color=color,        
+        linestyle=linestyle, 
+        linewidth=2          
+    )
+
+
+
+plt.xlabel('X-axis Value', fontsize=12)
+plt.ylabel('Y-axis Value', fontsize=12)
+
+
+plt.legend(loc='best', fontsize=10) 
+
+plt.grid(True, linestyle='--', alpha=0.6) 
+
+
+plt.show()
 
 
